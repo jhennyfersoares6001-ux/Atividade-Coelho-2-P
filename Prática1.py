@@ -37,8 +37,11 @@ class Aluno:
     def mostrar(self):
         print("Nome:", self.nome)
         print("Idade:", self.idade)
-        print("CPF:", self.cpf)
         print("Matrícula:", self.matricula)
+        print("CPF:", self.cpf)
+
+        print("Endereço:")
+        self.endereco.mostrar()
 
 
 class SalaDeAula:
@@ -50,21 +53,23 @@ class SalaDeAula:
 
 
 class Escola:
-    def __init__(self, nome, cnpj, telefone, endereco):
+
+    def __init__(self, nome, cnpj, telefone):
         self.nome = nome
         self.cnpj = cnpj
         self.telefone = telefone
-        self.endereco = endereco
+
         self.professores = []
         self.alunos = []
-        self.salas = [
-            SalaDeAula(1),
-            SalaDeAula(2),
-            SalaDeAula(3)
-        ]
+        self.salas = []
+
+    def adicionar_sala(self, numero):
+        sala = SalaDeAula(numero)
+        self.salas.append(sala)
 
     def adicionar_professor(self, professor):
         self.professores.append(professor)
+        professor.adicionar_escola(self)
 
     def cadastrar_aluno(self, aluno):
         self.alunos.append(aluno)
@@ -73,4 +78,3 @@ class Escola:
         print("Nome:", self.nome)
         print("CNPJ:", self.cnpj)
         print("Telefone:", self.telefone)
-        print("Endereço:", self.endereco)
